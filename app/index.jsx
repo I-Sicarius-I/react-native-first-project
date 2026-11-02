@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
+import { Link } from 'expo-router'
 import Logo from '../assets/favicon.png'
 
 const Home = () => {
@@ -6,13 +7,16 @@ const Home = () => {
     <View style={styles.container}>
       <Image source={Logo} style={styles.img}/>
 
-      <Text style={[styles.title, {color: 'purple'}]}>The Number 1</Text>
+      <Text style={[styles.title, {color: 'red'}]}>The Number 1</Text>
       <Text style={{marginTop: 10, marginBottom: 30}}>
         Reading List App
       </Text>
       <View style={styles.card}>
         <Text>Hello, this is a card.</Text>
       </View>
+
+      <Link href="/about" style={styles.link}>About Page</Link>
+      <Link href="/contact" style={styles.link}>Contact Page</Link>
     </View>
   )
 }
@@ -31,14 +35,17 @@ const styles = StyleSheet.create({
     },
     img: {
       marginVertical: 20,
-
     },
     card: {
       backgroundColor: '#eee',
       padding: 20,
+      marginBottom: 15,
       borderRadius: 5,
       boxShadow: '4px 4px rgba(0,0,0,0.1)'
     },
-    
+    link: {
+        marginVertical: 10,
+        borderBottomWidth: 1
+    }
 })
 
