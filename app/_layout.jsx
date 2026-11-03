@@ -20,7 +20,8 @@ const RootLayout = () => {
                 {/* <Slot /> <- gives slot for a page, <Stack/> is practically the same, but provides a navigation behavior*/}
                 <Stack.Screen name="index" options={{title: 'Home'}}/> {/*Configuration component */}
                 <Stack.Screen name="(auth)" options={{headerShown: false}}/>
-                
+                <Stack.Screen name="(dashboard)" options={{headerShown: false}}/>
+
                 <Stack.Screen name="about" options={{title: 'About'}}/>
                 <Stack.Screen name="contact" options={{title: 'Contact', headerShown: false}}/>
             </Stack>

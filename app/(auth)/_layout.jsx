@@ -1,7 +1,7 @@
 import { StatusBar } from 'react-native'
 import { Stack } from 'expo-router'
 
-const _layout = () => {
+const AuthLayout = () => {
   return (
     <>
         <StatusBar style="auto"/>
@@ -12,4 +12,4 @@ const _layout = () => {
   )
 }
 
-export default _layout
+export default AuthLayout
