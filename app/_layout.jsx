@@ -1,7 +1,7 @@
-// import { Slot } from 'expo-router'
 import { Stack } from 'expo-router'
-import { StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native'
+import { StatusBar, StyleSheet, useColorScheme } from 'react-native'
 import { Colors } from '../constants/Colors';
+import { UserProvider } from '../contexts/UserContext';
 
 const RootLayout = () => {
 
@@ -11,7 +11,7 @@ const RootLayout = () => {
 
 
     return (
-        <>
+        <UserProvider>
             <StatusBar value="auto"/>
             <Stack screenOptions={{
                 headerStyle: {backgroundColor: theme.navBackground},
@@ -25,7 +25,7 @@ const RootLayout = () => {
                 <Stack.Screen name="about" options={{title: 'About'}}/>
                 <Stack.Screen name="contact" options={{title: 'Contact', headerShown: false}}/>
             </Stack>
-        </>
+        </UserProvider>
     )
 }
 
