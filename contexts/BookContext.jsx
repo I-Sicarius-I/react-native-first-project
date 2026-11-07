@@ -22,6 +22,7 @@ export function BooksProvider({children}){
                     Query.equal('userId', user.$id)
                 ]
             })
+            setBooks(response.rows)
         } catch(error) {
             console.error(error.message);
         }
