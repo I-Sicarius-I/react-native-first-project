@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState} from 'react'
-import { db } from '../lib/appwrite';
-import { ID, Permission, Query, Role } from 'react-native-appwrite';
+import { db, client } from '../lib/appwrite';
+import { Channel, ID, Permission, Query, Realtime, Role } from 'react-native-appwrite';
 import { useUser } from '../hooks/useUser';
 
 const DATABASE_ID = "6aec81fc003b59dedbf9"
@@ -63,12 +63,32 @@ export function BooksProvider({children}){
     }
 
     useEffect(() => {
+        let subscription;
+        
 
         if(user){
             fetchBooks();
+            
+            const realtime = new Realtime(client);
+
+            // let getSubscription = async() => await realtime.subscribe(Channel.account(), response => {
+            //     // const { payload, events } = response;
+
+            //     // if(events[0].includes('create')){
+            //     //     setBooks((prevBooks) => [...prevBooks, payload]);
+            //     // }
+            //     console.log(response)
+            // })
+            // subscription = getSubscription();
+
         } else {
             setBooks([]);
         }
+
+
+        // return async() => {
+        //     if(subscription) await subscription.unsubscribe();
+        // }
 
     }, [user])
 
