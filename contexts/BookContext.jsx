@@ -30,7 +30,13 @@ export function BooksProvider({children}){
 
     async function fetchBookById(id) {
         try{
+            const response = await db.getRow({
+                databaseId: DATABASE_ID,
+                tableId: TABLE_ID,
+                rowId: id
+            })
 
+            return response
         } catch(error) {
             console.error(error.message);
         }
@@ -56,7 +62,11 @@ export function BooksProvider({children}){
 
     async function deleteBook(id){
         try{
-
+            await db.deleteRow({
+                databaseId: DATABASE_ID,
+                tableId: TABLE_ID,
+                rowId: id
+            })
         } catch(error) {
             console.error(error.message);
         }
@@ -78,6 +88,9 @@ export function BooksProvider({children}){
             //     //     setBooks((prevBooks) => [...prevBooks, payload]);
             //     // }
             //     console.log(response)
+            //     // if(events[0].includes('delete')){
+            //     //     setBooks((prevBooks) => [...prevBooks, payload]);
+            //     // }
             // })
             // subscription = getSubscription();
 

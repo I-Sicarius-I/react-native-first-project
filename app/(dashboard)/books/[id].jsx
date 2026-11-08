@@ -1,16 +1,64 @@
 // dynamic route = [<name>].jsx
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 import ThemedView from '../../../components/ThemedView'
 import ThemedText from '../../../components/ThemedText'
-import { useLocalSearchParams } from 'expo-router'
+import { useLocalSearchParams, useRouter } from 'expo-router'
+import { useEffect, useState } from 'react'
+import { useBooks } from '../../../hooks/useBooks'
+import Spacer from '../../../components/Spacer'
+import ThemedCard from '../../../components/ThemedCard'
+import ThemedLoader from '../../../components/ThemedLoader'
+import ThemedButton from '../../../components/ThemedButton'
+import { Colors } from '../../../constants/Colors'
 
 
 const BookDetails = () => {
-    const { id } = useLocalSearchParams()
+    const [book, setBook] = useState(null);
+    
+    const { id } = useLocalSearchParams();
+    const { fetchBookById, deleteBook } = useBooks();
+    const router = useRouter();
+
+    const handleDelete = async() => {
+        await deleteBook(id);
+        setBook(null);
+        router.replace('/books')
+    }
+
+    useEffect(() => {
+        async function loadBook(){
+            const bookData = await fetchBookById(id);
+            setBook(bookData);
+        }
+        loadBook();
+    }, [id]);
+
+    if(!book){
+        return (
+            <ThemedView safe={true} style={styles.container}>
+                <ThemedLoader/>
+            </ThemedView>
+        )
+    }
 
   return (
     <ThemedView safe={true} style={styles.container}>
-        <ThemedText>Book Details - {id}</ThemedText>
+        <ThemedCard style={styles.card}>
+            <ThemedText style={styles.title}>{book.title}</ThemedText>
+            <ThemedText>Written by {book.author}</ThemedText>
+            <Spacer />
+
+            <ThemedText tittle={true}>Book description:</ThemedText>
+            <Spacer height={10}/>
+
+            <ThemedText>{book.description}</ThemedText>
+        </ThemedCard>
+
+        <ThemedButton onPress={handleDelete} style={styles.delete}>
+            <Text style={{color: "#fff", textAlign: 'center'}}>
+                Delete Book
+            </Text>
+        </ThemedButton>
     </ThemedView>
   )
 }
@@ -21,6 +69,19 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: "stretch"
+    },
+    title: {
+        fontSize: 22,
+        marginBottom: 10,
+    },
+    card: {
+        margin: 20
+    },
+    delete: {
+        marginTop: 40,
+        backgroundColor: Colors.warning,
+        width: 200,
+        alignSelf: 'center'
     }
 })
 
