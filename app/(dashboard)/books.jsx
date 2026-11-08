@@ -6,10 +6,12 @@ import Spacer from '../../components/Spacer'
 
 import { useBooks } from '../../hooks/useBooks'
 import { Colors } from '../../constants/Colors'
+import { useRouter } from 'expo-router'
 
 
 const Books = () => {
     const { books } = useBooks();
+    const router = useRouter();
 
 
   return (
@@ -26,7 +28,7 @@ const Books = () => {
             keyExtractor={(item) => item.$id}
             contentContainerStyle={styles.list}
             renderItem={({item}) => (
-                <Pressable>
+                <Pressable onPress={() => {console.log(item.$id); router.push({pathname: `/books/${item.$id}`})}}>
                     <ThemedCard style={styles.card}>
                         <ThemedText style={styles.title} title={true}>{item.title}</ThemedText>
                         <ThemedText>Written By {item.author}</ThemedText>

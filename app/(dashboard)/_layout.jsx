@@ -46,6 +46,10 @@ const DashboardLayout = () => {
                         color={focused ? theme.iconColorFocused : theme.iconColor}
                     />
                 )}}/>
+            <Tabs.Screen 
+                name="books/[id]"
+                options={{tabBarButton: () =>  null, tabBarItemStyle: {display: 'none'}}}
+            />
         </Tabs>
     </UserOnly>
   )
