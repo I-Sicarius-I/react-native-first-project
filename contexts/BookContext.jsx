@@ -89,7 +89,7 @@ export function BooksProvider({children}){
             //     // }
             //     console.log(response)
             //     // if(events[0].includes('delete')){
-            //     //     setBooks((prevBooks) => [...prevBooks, payload]);
+            //     //     setBooks((prevBooks) => prevBooks.filter((book) => book.$id !== payload.$id));
             //     // }
             // })
             // subscription = getSubscription();
